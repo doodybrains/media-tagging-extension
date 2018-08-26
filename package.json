@@ -5,9 +5,9 @@
   "main": "dist/index.html",
   "license": "MIT",
   "scripts": {
-    "build": "gulp build",
+    "build": "node ./create-env.js && gulp build",
     "dev": "node ./create-env.js && gulp dev",
-    "bundle": "node ./create-env.js && gulp bundle --production",
+    "bundle": "gulp bundle --production",
     "test": "yarn test:lint-js && yarn test:unit",
     "test:lint-js": "eslint --cache --quiet packages/**/**/*.js",
     "test:unit": "jest --coverage",
