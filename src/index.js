@@ -1,6 +1,7 @@
 const contentful = require('contentful')
 const mgmt = require('contentful-management')
-console.log(process.env.SPACE_ID)
+
+console.log(`${process.env.SPACE_ID}`)
 window.contentfulExtension.init(initExtension);
 
 const cda = contentful.createClient({space: process.env.SPACE_ID, accessToken: process.env.ACCESS_TOKEN})
