@@ -1,11 +1,11 @@
 const contentful = require('contentful')
 const mgmt = require('contentful-management')
-
+console.log(process.env.SPACE_ID)
 window.contentfulExtension.init(initExtension);
 
 const cda = contentful.createClient({space: process.env.SPACE_ID, accessToken: process.env.ACCESS_TOKEN})
 
-console.log(process.env.process.env.SPACE_ID)
+
 cda.getEntries({content_type:'taggedImages'}).then(response => {
   buildTreeWithJSONArray(response.items, 'assets')
 }).catch(console.error)
