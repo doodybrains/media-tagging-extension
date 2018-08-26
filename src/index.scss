@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+}
+body {
+  height: 100%;
+}
+#assets {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: flex-start;
+}
+#assets .thumb {
+  height: 90px;
+  width: 15%;
+  margin: 0 10px;
+  position: relative;
+  overflow: hidden;
+
+  &.published img {
+    border: 5px solid #33ca6c;
+  }
+}
+#assets img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
+}
+h4 {
+  display: block;
+  width: 100%;
+}

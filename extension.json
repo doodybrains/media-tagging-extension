@@ -1,0 +1,7 @@
+{
+  "name": "Media Tagging Extension",
+  "id": "mediaTaggingExtension",
+  "fieldTypes": ["Entries", "Assets"],
+  "srcdoc": "./dist/index.html",
+  "sidebar": false
+}

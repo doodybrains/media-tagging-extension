@@ -1,0 +1,42 @@
+{
+  "name": "mediaTaggingExtension",
+  "version": "1.0.0",
+  "description": "Media Tagging Extension",
+  "main": "dist/index.html",
+  "license": "MIT",
+  "scripts": {
+    "build": "gulp build",
+    "dev": "gulp dev",
+    "bundle": "gulp bundle --production",
+    "test": "yarn test:lint-js && yarn test:unit",
+    "test:lint-js": "eslint --cache --quiet packages/**/**/*.js",
+    "test:unit": "jest --coverage",
+    "test:unit:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "babelify": "^8.0.0",
+    "browser-sync": "^2.24.4",
+    "browserify": "^16.2.2",
+    "contentful-cli": "^0.14.2",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-inline-source": "^3.1.0",
+    "gulp-noop": "^1.0.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "yargs": "^11.0.0"
+  },
+  "dependencies": {
+    "contentful": "^7.0.3",
+    "contentful-management": "^5.3.2"
+  }
+}
