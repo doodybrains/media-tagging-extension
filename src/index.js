@@ -1,15 +1,11 @@
 const contentful = require('contentful')
 const mgmt = require('contentful-management')
 
-const space_id = ''
-const access_token = ''
-const personal = ''
-
 window.contentfulExtension.init(initExtension);
 
-const cda = contentful.createClient({space: space_id, accessToken: access_token})
+const cda = contentful.createClient({space: process.env.SPACE_ID, accessToken: process.env.ACCESS_TOKEN})
 
-console.log(process.env.SPACE_ID)
+console.log(process.env.process.env.SPACE_ID)
 cda.getEntries({content_type:'taggedImages'}).then(response => {
   buildTreeWithJSONArray(response.items, 'assets')
 }).catch(console.error)
@@ -39,9 +35,9 @@ function buildTreeWithJSONArray(json, root, linkId) {
 }
 
 function buildEntries(asset_id, tags, tagId, version) {
-  const client = mgmt.createClient({accessToken: personal, headers: {'X-Contentful-Version': version}})
+  const client = mgmt.createClient({accessToken: process.env.PERSONAL, headers: {'X-Contentful-Version': version}})
 
-  client.getSpace(space_id)
+  client.getSpace(process.env.SPACE_ID)
   .then((space) => space.getEnvironment('master'))
   .then((environment) => environment.getAsset(asset_id))
   .then((asset) => {
