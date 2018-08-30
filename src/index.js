@@ -18,7 +18,7 @@ function initExtension(extension) {
 function getAssets(extension) {
   const sys = extension.entry.getSys();
   if (sys) {
-    axios.post('http://localhost:3000/', { sysId: 'jaw9YaHoukG60i6mce242' }, config)
+    axios.post('https://media-tagging-proxy-server.herokuapp.com/', { sysId: sys.Id }, config)
     .then(function(response){
        updateAssets(response)
      });
@@ -38,7 +38,7 @@ function updateAssets(assets) {
 }
 
 function buildEntries(asset_id, tags, tag_id, version) {
-  axios.post('http://localhost:3000/build', {assetId: asset_id, allTags: tags, versionNo: version}, config)
+  axios.post('https://media-tagging-proxy-server.herokuapp.com/build', {assetId: asset_id, allTags: tags, versionNo: version}, config)
   .then(function(response) {
      console.log(response);
      const assetThumb = document.getElementById(`${asset_id}-${tag_id}`);
