@@ -1,10 +1,9 @@
 const axios = require('axios');
-
-window.contentfulExtension.init(initExtension);
-
-var config = {
+const config = {
   headers: {'Accept': 'application/json', 'Content-Type': 'application/json',}
 };
+
+window.contentfulExtension.init(initExtension);
 
 function initExtension(extension) {
   extension.window.updateHeight();
@@ -17,6 +16,7 @@ function initExtension(extension) {
 
 function getAssets(extension) {
   const sys = extension.entry.getSys();
+
   if (sys) {
     axios.post('https://media-tagging-proxy-server.herokuapp.com/', { sysId: sys.Id }, config)
     .then(function(response){
@@ -27,14 +27,15 @@ function getAssets(extension) {
 
 function updateAssets(assets) {
   const mainContainer = document.getElementById('assets');
+  if (assets) {
+    assets.data.fields.images.forEach(function (fi) {
+      const id = fi.sys.id;
+      const tagId = assets.data.sys.id
 
-  assets.data.fields.images.forEach(function (fi) {
-    const id = fi.sys.id;
-    const tagId = assets.data.sys.id
-
-    mainContainer.insertAdjacentHTML('beforeend', `<div class="thumb" id="${id}-${tagId}"><img src=${fi.fields.file.url} /></thumb>` );
-    buildEntries(`${fi.sys.id}`, `${assets.data.fields.imageTags}`, `${assets.data.sys.id}`, `${fi.sys.revision}`)
-  })
+      mainContainer.insertAdjacentHTML('beforeend', `<div class="thumb" id="${id}-${tagId}"><img src=${fi.fields.file.url} /></thumb>` );
+      buildEntries(`${fi.sys.id}`, `${assets.data.fields.imageTags}`, `${assets.data.sys.id}`, `${fi.sys.revision}`)
+    })
+  }
 }
 
 function buildEntries(asset_id, tags, tag_id, version) {
