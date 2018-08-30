@@ -16,9 +16,9 @@ function initExtension(extension) {
 
 function getAssets(extension) {
   const sys = extension.entry.getSys();
-
   if (sys) {
-    axios.post('https://media-tagging-proxy-server.herokuapp.com/', { sysId: sys.Id }, config)
+    console.log('sys');
+    axios.post('https://media-tagging-proxy-server.herokuapp.com/', { sysId: `${sys.id}` }, config)
     .then(function(response){
        updateAssets(response)
      });
