@@ -3,41 +3,43 @@ const mgmt = require('contentful-management')
 
 window.contentfulExtension.init(initExtension);
 
-const cda = contentful.createClient({space: process.env.SPACE_ID, accessToken: process.env.ACCESS_TOKEN})
-
-
-cda.getEntries({content_type:'taggedImages'}).then(response => {
-  buildTreeWithJSONArray(response.items, 'assets')
-}).catch(console.error)
-
+const cda = contentful.createClient({space: '', accessToken: ''})
 
 function initExtension(extension) {
   extension.window.updateHeight();
   extension.window.startAutoResizer();
+  if (extension.entry.fields.imageTags) {
+    getAssets(extension);
+  }
 }
 
-function buildTreeWithJSONArray(json, root, linkId) {
-  let mainContainer = '';
-  if (!linkId) {
-    mainContainer = document.getElementById(root);
+function getAssets(extension) {
+  const sys = extension.entry.getSys();
+  if (sys) {
+    // hit heroku app with sys.id
+    // get response and send through to getAssets
+    cda.getEntry(sys.id).then(response => {
+      updateAssets(response)
+    }).catch(console.error)
   }
+}
 
-  for (var i = 0; i < json.length; i++) {
-    mainContainer.insertAdjacentHTML('beforeend', `<h4>${json[i].fields.imageTags}</h4>` );
-    json[i].fields.images.forEach(function (fi) {
-      const id = fi.sys.id;
-      const tagId = json[i].sys.id
+function updateAssets(assets) {
+  const mainContainer = document.getElementById('assets');
 
-      mainContainer.insertAdjacentHTML('beforeend', `<div class="thumb" id="${id}-${tagId}"><img src=${fi.fields.file.url} /></thumb>` );
-      buildEntries(`${fi.sys.id}`, `${json[i].fields.imageTags}`, `${json[i].sys.id}`, `${fi.sys.revision}`)
-    })
-  }
+  assets.fields.images.forEach(function (fi) {
+    const id = fi.sys.id;
+    const tagId = assets.sys.id
+
+    mainContainer.insertAdjacentHTML('beforeend', `<div class="thumb" id="${id}-${tagId}"><img src=${fi.fields.file.url} /></thumb>` );
+    buildEntries(`${fi.sys.id}`, `${assets.fields.imageTags}`, `${assets.sys.id}`, `${fi.sys.revision}`)
+  })
 }
 
 function buildEntries(asset_id, tags, tagId, version) {
-  const client = mgmt.createClient({accessToken: process.env.PERSONAL, headers: {'X-Contentful-Version': version}})
+  const client = mgmt.createClient({accessToken: '', headers: {'X-Contentful-Version': version}})
 
-  client.getSpace(process.env.SPACE_ID)
+  client.getSpace('l93sefy83g83')
   .then((space) => space.getEnvironment('master'))
   .then((environment) => environment.getAsset(asset_id))
   .then((asset) => {
