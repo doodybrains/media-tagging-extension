@@ -4,6 +4,7 @@ body {
 body {
   height: 100%;
 }
+
 #assets {
   width: 100%;
   display: flex;
@@ -35,4 +36,19 @@ body {
 h4 {
   display: block;
   width: 100%;
+}
+#update-assets {
+  background: linear-gradient(to top, #0eb87f, #14d997);
+  padding: 0.625rem 1.5rem;
+  cursor: pointer;
+  width: 50%;
+  border-color: #0eb87f;
+  color: #fff;
+  font-size: 14px;
+  font-family: "Avenir Next W01", Helvetica, sans-serif;
+  margin-top: 20px;
+
+  &:focus {
+    outline: 0;
+  }
 }
