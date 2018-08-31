@@ -12,4 +12,4 @@ Depends on [Media Tagging Proxy](https://github.com/doodybrains/media-tagging-pr
 
 Currently in the process of code refactor and proper documentation for others to use.
 
-![gif](https://media.giphy.com/media/LYtYd30GMh5vhZMuSD/giphy.gif)
+![gif](https://media.giphy.com/media/X7f2bgENwgEr0GEprV/giphy.gif)
